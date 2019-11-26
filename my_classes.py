@@ -1,5 +1,6 @@
 import random
 
+
 class Bag:
     '''
     по правилам игры есть мешок с боченками от 1 до 90
@@ -31,11 +32,13 @@ class Bag:
         # если боченки кончились
         raise Exception('Нечего вытаскивать из мешка :(')
 
+
 class Player:
     '''
     в игре может быть несколько игроков. у каждого игрока может быть больше 1 карточки
     '''
-    def __init__(self, name, cards_count):
+
+    def __init__(self, name, cards_count=1):
         # имя игрока
         self.name = name
         # дадим ему столько карточек сколько надо
@@ -55,13 +58,15 @@ class Player:
                 # если хотя бы одна карточка может играть, то и игрок может играть
                 self.can_play = True
 
+
 class Card:
     '''
     класс игровых карточек
     '''
+
     def __init__(self, i):
         # у каждой карточки игрока свой номер
-        self.id = i+1
+        self.id = i + 1
         # сразу определим может карточка играть дальше или нет
         self.can_play = True
         # изначально карточка не может быть победившей
@@ -70,9 +75,14 @@ class Card:
         self.card_nums = sample(range(1, 91), 15)
         # TODO реализовать случайное положение цифр на карточке
 
-    def check_card(self, num):
+    def check_card(self, num, answer):
         # проверяем карточку на наличие вытащенного боченка с цифрой
+        # если карточка может играть
         if self.can_play:
+            # если номер есть в карточке
+            if num in self.card_nums:
+                # заменяем его на '-'
+                self.card_nums[self.card_nums.index(num)] = '-'
 
 
 if __name__ == '__main__':
