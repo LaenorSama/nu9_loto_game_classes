@@ -32,6 +32,21 @@ class Bag:
         # если боченки кончились
         raise Exception('Нечего вытаскивать из мешка :(')
 
+    # применяем магию
+    def __str__(self):
+        return f'В мешке остались следующие боченки: {self.set}'
+
+    def __eq__(self, other):
+        # сравнение на равенство
+        return len(self.set) == len(other.set)
+
+    def __ne__(self, other):
+        # сравнение на неравенство
+        return len(self.set) != len(other.set)
+
+    def __getitem__(self, item):
+        # по индексу можно посмотреть какой боченок на каком месте
+        return self.set[item]
 
 class Player:
     '''
@@ -68,7 +83,41 @@ class Player:
     #     # тут проверяем все карточки, будем зачеркивать или нет
     # принято решение реализовать иначе, чтобы не было взаимодействие с консолью из класса
 
+    # применяем магию
+    def __str__(self):
+        return f'Игрок: {self.name}, id: {self.id}, кол-во карточек: {len(self.cards)}'
 
+    def __eq__(self, other):
+        # сравнение на равенство
+        # сравнивать будем по количеству карточек которые могут играть
+        ok_cards_1 = 0
+        for card in self.cards:
+            if card.can_play:
+                ok_cards_1 += 1
+        ok_cards_2 = 0
+        for card in other.cards:
+            if card.can_play:
+                ok_cards_2 += 1
+
+        return ok_cards_1 == ok_cards_2
+
+    def __ne__(self, other):
+        # сравнение на неравенство
+        # сравнивать будем по количеству карточек которые могут играть
+        ok_cards_1 = 0
+        for card in self.cards:
+            if card.can_play:
+                ok_cards_1 += 1
+        ok_cards_2 = 0
+        for card in other.cards:
+            if card.can_play:
+                ok_cards_2 += 1
+
+        return ok_cards_1 != ok_cards_2
+
+    def __getitem__(self, item):
+        # по индексу можно посмотреть карточку игрока
+        return self.cards[item].card_nums
 
 class Card:
     '''
@@ -155,6 +204,29 @@ class Card:
                     print('Ничего не зачеркиваем, карточка выглядит так:')
                     self.show()
 
+    # применяем магию
+    def __str__(self):
+        return f'Карточка: {self.id}, содержимое: {self.card_nums}'
+
+    def __eq__(self, other):
+        # сравнение на равенство
+        # сравнивать будем по количеству зачеркнутых цифр
+        strike_num_1 = self.card_nums.count('-')
+        strike_num_2 = other.card_nums.count('-')
+        return strike_num_1 == strike_num_2
+
+    def __ne__(self, other):
+        # сравнение на неравенство
+        # сравнивать будем по количеству зачеркнутых цифр
+        strike_num_1 = self.card_nums.count('-')
+        strike_num_2 = other.card_nums.count('-')
+        return strike_num_1 != strike_num_2
+
+    def __getitem__(self, item):
+        # по индексу можно посмотреть элемент карточки
+        return self.card_nums[item]
+
+
 class ComputerPlayer(Player):
     '''
     класс игрока-компьютера
@@ -168,6 +240,11 @@ class ComputerPlayer(Player):
     def show(self):
         # показывает информацию о игроке-компьютере
         print(f'Компьютер номер {self.id}: {self.name}')
+
+    # применяем магию
+    def __str__(self):
+        return f'Игрок-компьютер: {self.name}, id: {self.id}, кол-во карточек: {len(self.cards)}'
+    # магию на сравнение не будем переопределять. сравнивать надо так же по количестчу
 
 
 class ComputerCard(Card):
