@@ -213,21 +213,21 @@ class ComputerCard(Card):
                     self.show()
 
 # немного тестов
-if __name__ == '__main__':
-    abra = Bag()
-    abra.shuffle()
-    q = abra.choice()
-    print()
-    player = Player('Max', 0)
-    player.show()
-    player.cards[0].show()
-    player.cards[0].check(player.cards[0].card_nums[1],'y')
-
-    computer_player = ComputerPlayer('Umbrella', 0)
-    computer_player.show()
-    computer_player.cards[0].show()
-    computer_player.cards[0].check(computer_player.cards[0].card_nums[1])
-
-    print()
-
-    print(computer_player.cards[0].winner)
+# if __name__ == '__main__':
+#     abra = Bag()
+#     abra.shuffle()
+#     q = abra.choice()
+#     print()
+#     player = Player('Max', 0)
+#     player.show()
+#     player.cards[0].show()
+#     player.cards[0].check(player.cards[0].card_nums[1],'y')
+#
+#     computer_player = ComputerPlayer('Umbrella', 0)
+#     computer_player.show()
+#     computer_player.cards[0].show()
+#     computer_player.cards[0].check(computer_player.cards[0].card_nums[1])
+#
+#     print()
+#
+#     print(computer_player.cards[0].winner)
